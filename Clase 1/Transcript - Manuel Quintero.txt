@@ -1,0 +1,50 @@
+
+PS C:\WINDOWS\system32> Get-History
+
+  Id CommandLine                                                                                                                     
+  -- -----------                                                                                                                     
+   1 update -help                                                                                                                    
+   2 update -help                                                                                                                    
+   3 Update-Help                                                                                                                     
+   4 Update-Help                                                                                                                     
+   5 Update-Help                                                                                                                     
+   6 StartTranscript                                                                                                                 
+   7 Start Transcript                                                                                                                
+   8 Start-Transcript                                                                                                                
+   9 ConvertTo-Html}                                                                                                                 
+  10 Stop-Transcript                                                                                                                 
+  11 Start-Transcript -LiteralPath C:\Users\mapac\OneDrive\Documentos\Icesi\Profesionalizantes\Sistemas Operacionales\PowerShell     
+  12 Start-Transcript -LiteralPath "C:\Users\mapac\OneDrive\Documentos\Icesi\Profesionalizantes\Sistemas Operacionales\PowerShell"   
+  13 help *html*                                                                                                                     
+  14 ConvertTo-Html                                                                                                                  
+  15 help *out*                                                                                                                      
+  16 Out-Printer                                                                                                                     
+  17 Out-File                                                                                                                        
+  18 help *process*                                                                                                                  
+  19 help printer                                                                                                                    
+  20 help file                                                                                                                       
+  21 help *out file*                                                                                                                 
+  22 help log                                                                                                                        
+  23 New-EventLog                                                                                                                    
+  24 help New-EventLog                                                                                                               
+  25 help Write-EventLog                                                                                                             
+  26 New-Alias                                                                                                                       
+  27 mq                                                                                                                              
+  28 Get-Process                                                                                                                     
+  29 help *alias*                                                                                                                    
+  30 help Export-Alias                                                                                                               
+  31 help Import-Alias                                                                                                               
+  32 help *register*                                                                                                                 
+  33 help log                                                                                                                        
+  34 help Get-EventLog                                                                                                               
+  35 Get-EventLog -LogName Security -Newest 100                                                                                      
+  36 help Service                                                                                                                    
+  37 help Get-Service                                                                                                                
+  38 Get-Service -ComputerName "pcremoto"                                                                                            
+  39 help Out-File                                                                                                                   
+  40 help Out-File -Detailed                                                                                                         
+  41 Out-File -Width 2000                                                                                                            
+  42 Get-Process | Out-File procesos.txt                                                                                             
+  43 Get-Service | Out-File procesos.txt -NoClobber                                                                                  
+  44 help Start-Transcript                                                                                                           
+  45 Stop-Transcript    
