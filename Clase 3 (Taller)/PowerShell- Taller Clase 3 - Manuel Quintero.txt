@@ -1,0 +1,375 @@
+﻿Taller realizado por: Manuel Quintero
+Código: A00134276
+
+**********************
+Inicio de la transcripción de Windows PowerShell
+Hora de inicio: 20200223092901
+Nombre de usuario: MQuintero\manuel quintero
+Usuario RunAs: MQuintero\manuel quintero
+Nombre de la configuración: 
+Máquina: MQuintero (Microsoft Windows NT 10.0.18362.0)
+Aplicación host: C:\WINDOWS\system32\WindowsPowerShell\v1.0\PowerShell_ISE.exe
+Id. de proceso: 4244
+PSVersion: 5.1.18362.628
+PSEdition: Desktop
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1.18362.628
+BuildVersion: 10.0.18362.628
+CLRVersion: 4.0.30319.42000
+WSManStackVersion: 3.0
+PSRemotingProtocolVersion: 2.3
+SerializationVersion: 1.1.0.1
+**********************
+La transcripción ha comenzado. El archivo de salida es C:\Users\mapac\OneDrive\Documentos\PowerShell_transcript.MQUINTERO.rQnpVWb9.20200223092901.txt
+
+Pregunta #1
+
+*Se crean los dos archivos*
+
+PS C:\WINDOWS\system32> notepad one.txt
+PS C:\WINDOWS\system32> notepad two.txt
+PS C:\WINDOWS\system32> ErrorTerminación(): "Se ha detenido la canalización."
+PS C:\WINDOWS\system32> ErrorTerminación(): "Se ha detenido la canalización."
+PS C:\WINDOWS\system32> ErrorTerminación(): "Se ha detenido la canalización."
+PS C:\WINDOWS\system32> ErrorTerminación(): "Se ha detenido la canalización."
+PS C:\WINDOWS\system32> ErrorTerminación(): "Se ha detenido la canalización."
+PS C:\WINDOWS\system32> ErrorTerminación(): "Se ha detenido la canalización."
+
+*Se comparan mediante el comando Compare-Object -ReferenceObject (Get-Content .\one.txt) -DifferenceObject (Get-Content .\two.txt)*
+
+PS C:\WINDOWS\system32> Compare-Object -ReferenceObject (Get-Content .\one.txt) -DifferenceObject (Get-Content .\two.txt)
+
+InputObject SideIndicator
+----------- -------------
+Archivo 2   =>
+Archivo 1   <=
+
+
+Pregunta #2
+
+*Se utiliza el comando*
+
+PS C:\WINDOWS\system32> get-service | export-csv servicios.csv | out-file
+>> ErrorTerminación(Out-File): "No se puede procesar el argumento porque el valor del argumento "path" es NULL. Cambie el valor del argumento "path" a un valor no nulo."
+out-file : No se puede procesar el argumento porque el valor del argumento "path" es NULL. Cambie el valor del 
+argumento "path" a un valor no nulo.
+En línea: 1 Carácter: 42
++ get-service | export-csv servicios.csv | out-file
++                                          ~~~~~~~~
+    + CategoryInfo          : InvalidArgument: (:) [Out-File], PSArgumentNullException
+    + FullyQualifiedErrorId : ArgumentNull,Microsoft.PowerShell.Commands.OutFileCommand
+out-file : No se puede procesar el argumento porque el valor del argumento "path" es NULL. Cambie el valor del argumento "path" a un valor
+no nulo.
+En línea: 1 Carácter: 42
++ get-service | export-csv servicios.csv | out-file
++                                          ~~~~~~~~
+    + CategoryInfo          : InvalidArgument: (:) [Out-File], PSArgumentNullException
+    + FullyQualifiedErrorId : ArgumentNull,Microsoft.PowerShell.Commands.OutFileCommand
+PS C:\WINDOWS\system32> ErrorTerminación(): "Se ha detenido la canalización."
+
+*Esto ocurre a que no se ha determinado un path determinado para el out-file, como lo muestra el error. Además, el export no retorna un objeto que pueda ser
+trabajado por el out-file cmdlet*
+
+
+Pregunta #3
+
+>> Get-Service | Export-Csv servicios.csv -Delimiter ";"
+
+*El parámetro -Delimiter nos permite establecer el separador que necesitemos.*
+
+Pregunta #4
+
+PS C:\WINDOWS\system32> Get-Process | Export-Csv noClobber.csv -NoClobber
+PS C:\WINDOWS\system32> Get-Process | Export-Csv noClobber.csv -NoClobber
+>> ErrorTerminación(Export-Csv): "El archivo 'C:\WINDOWS\system32\noClobber.csv' ya existe."
+Export-Csv : El archivo 'C:\WINDOWS\system32\noClobber.csv' ya existe.
+En línea: 1 Carácter: 15
++ Get-Process | Export-Csv noClobber.csv -NoClobber
++               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ResourceExists: (C:\WINDOWS\system32\noClobber.csv:String) [Export-Csv], IOException
+    + FullyQualifiedErrorId : NoClobber,Microsoft.PowerShell.Commands.ExportCsvCommand
+Export-Csv : El archivo 'C:\WINDOWS\system32\noClobber.csv' ya existe.
+En línea: 1 Carácter: 15
++ Get-Process | Export-Csv noClobber.csv -NoClobber
++               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ResourceExists: (C:\WINDOWS\system32\noClobber.csv:String) [Export-Csv], IOException
+    + FullyQualifiedErrorId : NoClobber,Microsoft.PowerShell.Commands.ExportCsvCommand
+
+Pregunta #5
+
+PS C:\WINDOWS\system32> (Get-Culture).TextInfo.ListSeparator
+;
+PS C:\WINDOWS\system32>  Get-Process | Export-Csv culture.csv -UseCulture
+PS C:\WINDOWS\system32> ErrorTerminación(): "Se ha detenido la canalización."
+PS C:\WINDOWS\system32> Get-Content -Path .\culture.csv
+
+*Salida*
+
+#TYPE System.Diagnostics.Process
+"Name";"SI";"Handles";"VM";"WS";"PM";"NPM";"Path";"Company";"CPU";"FileVersion";"ProductVersion";"Description";"Product";"__NounName";"BasePriority";"ExitCode";"HasExited";"ExitTime";"Handle";"SafeHandle";"HandleCount";"Id";"MachineName";"MainWindowHandle";"MainWindowTitle";"MainModule";"MaxWorkingSet";"MinWorkingSet";"Modules";"NonpagedSystemMemorySize";"NonpagedSystemMemorySize64";"PagedMemorySize";"PagedMemorySize64";"PagedSystemMemorySize";"PagedSystemMemorySize64";"PeakPagedMemorySize";"PeakPagedMemorySize64";"PeakWorkingSet";"PeakWorkingSet64";"PeakVirtualMemorySize";"PeakVirtualMemorySize64";"PriorityBoostEnabled";"PriorityClass";"PrivateMemorySize";"PrivateMemorySize64";"PrivilegedProcessorTime";"ProcessName";"ProcessorAffinity";"Responding";"SessionId";"StartInfo";"StartTime";"SynchronizingObject";"Threads";"TotalProcessorTime";"UserProcessorTime";"VirtualMemorySize";"VirtualMemorySize64";"EnableRaisingEvents";"StandardInput";"StandardOutput";"StandardError";"WorkingSet";"WorkingSet64";"Site";"Container"
+"AdaptiveSleepService";"0";"159";"4386914304";"7774208";"1720320";"8920";"C:\Program Files\ATI Technologies\ATI.ACE\A4\AdaptiveSleepService.exe";;"0,171875";;;;;"Process";"8";;"False";;"4564";"Microsoft.Win32.SafeHandles.SafeProcessHandle";"159";"9288";".";"0";""orporation";"5,015625";"10.0.18362.650 (WinBuild.160101.0800)";"10.0.18362.650";"Proceso host para los servicios de Windows";"Sistema operativo Microsoft? Windows?";"Process";"8";;"False";;"5900";"Microsoft.Win32.SafeHandles.SafeProcessHandle";"334";"2344";".";"0";"";"System.Diagnostics.ProcessModule (svchost.exe)";"1413120";"204800";"System.Diagnostics.ProcessModuleCollection";"12280";"12280";"3092480";"3092480";"93136";"93136";"3346432";"3346432";"10883072";"10883072";"90128384";"2203408351232";"True";"Normal";"3092480";"3092480";"00:00:02.8437500";"svchost";"15";"True";"0";"System.Diagnostics.ProcessStartInfo";"22/02/2020 9:18:38 p. m.";;"System.Diagnostics.ProcessThreadCollection";"00:00:05.0156250";"00:00:02.1718750";"87498752";"2203405721600";"False";;;;"10731520";"10731520";; ... ETC
+
+Pregunta #6
+
+PS C:\WINDOWS\system32> help random
+
+NOMBRE
+    Get-Random
+
+SINOPSIS
+    Gets a random number, or selects objects randomly from a collection.
+
+
+SINTAXIS
+    Get-Random [-InputObject] <Object[]> [-Count <Int32>] [-SetSeed <Int32>] [<CommonParameters>]
+
+    Get-Random [[-Maximum] <Object>] [-Minimum <Object>] [-SetSeed <Int32>] [<CommonParameters>]
+
+
+DESCRIPCIÓN
+    The Get-Random cmdlet gets a randomly selected number. If you submit a collection of objects to Get-Random , it gets one or more
+    randomly selected objects from the collection.
+
+    Without parameters or input, a Get-Random command returns a randomly selected 32-bit unsigned integer between 0 (zero) and
+    Int32.MaxValue (0x7FFFFFFF, 2,147,483,647).
+
+    You can use the parameters of Get-Random to specify a seed number, minimum and maximum values, and the number of objects returned from
+    a submitted collection.
+
+
+VÍNCULOS RELACIONADOS
+    Online Version: http://go.microsoft.com/fwlink/?LinkId=821799
+
+NOTAS
+    Para ver los ejemplos, escriba: "get-help Get-Random -examples".
+    Para obtener más información, escriba: "get-help Get-Random -detailed".
+    Para obtener información técnica, escriba: "get-help Get-Random -full".
+    Para obtener ayuda disponible en línea, escriba: "get-help Get-Random -online"
+
+
+PS C:\WINDOWS\system32> Get-Random 100
+61
+
+*Este cmdlet retorna un número entre 0 a 99*
+
+Pregunta #7
+
+PS C:\WINDOWS\system32> help date
+
+Name                              Category  Module                    Synopsis
+----                              --------  ------                    --------
+Update-Help                       Cmdlet    Microsoft.PowerShell.Core Downloads and installs the newest help files on your computer.
+Get-Date                          Cmdlet    Microsoft.PowerShell.U... Gets the current date and time.
+Set-Date                          Cmdlet    Microsoft.PowerShell.U... Changes the system time on the computer to a time that you specify.
+Update-FormatData                 Cmdlet    Microsoft.PowerShell.U... Updates the formatting data in the current session.
+Update-List                       Cmdlet    Microsoft.PowerShell.U... Adds items to and removes items from a property value that contains...
+Update-TypeData                   Cmdlet    Microsoft.PowerShell.U... Updates the extended type data in the session.
+Update-Script                     Function  PowerShellGet             ...
+Update-ModuleManifest             Function  PowerShellGet             ...
+Update-Module                     Function  PowerShellGet             ...
+Update-ScriptFileInfo             Function  PowerShellGet             ...
+Update-MpSignature                Function  Defender                  ...
+Update-WIMBootEntry               Cmdlet    Dism                      Update-WIMBootEntry...
+Update-AutologgerConfig           Function  EventTracingManagement    ...
+Update-EtwTraceSession            Function  EventTracingManagement    ...
+Update-IscsiTarget                Function  iSCSI                     ...
+Update-IscsiTargetPortal          Function  iSCSI                     ...
+Update-NetIPsecRule               Function  NetSecurity               ...
+Update-DscConfiguration           Function  PSDesiredStateConfigur... ...
+Update-SmbMultichannelConnection  Function  SmbShare                  ...
+Update-Disk                       Function  Storage                   ...
+Update-StorageFirmware            Function  Storage                   ...
+Update-StoragePool                Function  Storage                   ...
+Update-StorageProviderCache       Function  Storage                   ...
+Update-HostStorageCache           Function  Storage                   ...
+Get-WindowsUpdateLog              Function  WindowsUpdate             ...
+Install-WUUpdates                 Function  WindowsUpdateProvider     ...
+Get-WULastScanSuccessDate         Function  WindowsUpdateProvider     ...
+Get-WULastInstallationDate        Function  WindowsUpdateProvider     ...
+
+
+*El comando utilizado fue Get-Date*
+
+PS C:\WINDOWS\system32> Get-Date
+
+domingo, 23 de febrero de 2020 9:54:43 a. m.
+
+
+Pregunta #8
+
+*El comando utilizado fue (Get-Date).GetType() *
+
+
+PS C:\WINDOWS\system32> (Get-Date).GetType()
+
+IsPublic IsSerial Name                                     BaseType
+-------- -------- ----                                     --------
+True     True     DateTime                                 System.ValueType
+
+*El tipo de dato es System.ValueType*
+
+
+Pregunta #9
+
+PS C:\WINDOWS\system32> Get-Date| Select-Object -Property "DayOfWeek"
+
+DayOfWeek
+---------
+   Sunday
+
+
+Pregunta #10
+
+PS C:\WINDOWS\system32> help *HotFix*
+
+NOMBRE
+    Get-HotFix
+
+SINOPSIS
+    Gets the hotfixes that have been applied to the local and remote computers.
+
+
+SINTAXIS
+    Get-HotFix [-ComputerName <String[]>] [-Credential <PSCredential>] [-Description <String[]>] [<CommonParameters>]
+
+    Get-HotFix [[-Id] <String[]>] [-ComputerName <String[]>] [-Credential <PSCredential>] [<CommonParameters>]
+
+
+DESCRIPCIÓN
+    The Get-Hotfix cmdlet gets hotfixes (also called updates) that have been installed on either the local computer (or on specified remote
+    computers) by Windows Update, Microsoft Update, or Windows Server Update Services; the cmdlet also gets hotfixes or updates that have
+    been installed manually by users.
+
+
+VÍNCULOS RELACIONADOS
+    Online Version: http://go.microsoft.com/fwlink/?LinkId=821586
+    Win32_QuickFixEngineering http://go.microsoft.com/fwlink/?LinkID=145071
+    Get-ComputerRestorePoint
+    Add-Content
+
+NOTAS
+    Para ver los ejemplos, escriba: "get-help Get-HotFix -examples".
+    Para obtener más información, escriba: "get-help Get-HotFix -detailed".
+    Para obtener información técnica, escriba: "get-help Get-HotFix -full".
+    Para obtener ayuda disponible en línea, escriba: "get-help Get-HotFix -online"
+
+
+* El comando utilizado fue Get-HotFix *
+
+PS C:\WINDOWS\system32> Get-HotFix
+
+Source        Description      HotFixID      InstalledBy          InstalledOn
+------        -----------      --------      -----------          -----------
+PCUBILLOS     Update           KB4534132     NT AUTHORITY\SYSTEM  14/02/2020 12:00:00 a. m.
+PCUBILLOS     Security Update  KB4515383     NT AUTHORITY\SYSTEM  18/09/2019 12:00:00 a. m.
+PCUBILLOS     Security Update  KB4516115     NT AUTHORITY\SYSTEM  20/09/2019 12:00:00 a. m.
+PCUBILLOS     Security Update  KB4521863     NT AUTHORITY\SYSTEM  9/10/2019 12:00:00 a. m.
+PCUBILLOS     Security Update  KB4524244     NT AUTHORITY\SYSTEM  15/02/2020 12:00:00 a. m.
+PCUBILLOS     Security Update  KB4524569     NT AUTHORITY\SYSTEM  15/11/2019 12:00:00 a. m.
+PCUBILLOS     Security Update  KB4528759     NT AUTHORITY\SYSTEM  17/01/2020 12:00:00 a. m.
+PCUBILLOS     Security Update  KB4537759     NT AUTHORITY\SYSTEM  14/02/2020 12:00:00 a. m.
+PCUBILLOS     Security Update  KB4538674     NT AUTHORITY\SYSTEM  13/02/2020 12:00:00 a. m.
+PCUBILLOS     Update           KB4532693     NT AUTHORITY\SYSTEM  14/02/2020 12:00:00 a. m.
+
+
+
+
+Pregunta #11
+
+* El comando utilizado fue Get-HotFix|Select-Object -Property InstalledOn,InstalledBy,HotFixID *
+
+PS C:\WINDOWS\system32> Get-HotFix|Select-Object -Property InstalledOn,InstalledBy,HotFixID
+
+InstalledOn               InstalledBy         HotFixID
+-----------               -----------         --------
+14/02/2020 12:00:00 a. m. NT AUTHORITY\SYSTEM KB4534132
+18/09/2019 12:00:00 a. m. NT AUTHORITY\SYSTEM KB4515383
+20/09/2019 12:00:00 a. m. NT AUTHORITY\SYSTEM KB4516115
+9/10/2019 12:00:00 a. m.  NT AUTHORITY\SYSTEM KB4521863
+15/02/2020 12:00:00 a. m. NT AUTHORITY\SYSTEM KB4524244
+15/11/2019 12:00:00 a. m. NT AUTHORITY\SYSTEM KB4524569
+17/01/2020 12:00:00 a. m. NT AUTHORITY\SYSTEM KB4528759
+14/02/2020 12:00:00 a. m. NT AUTHORITY\SYSTEM KB4537759
+13/02/2020 12:00:00 a. m. NT AUTHORITY\SYSTEM KB4538674
+14/02/2020 12:00:00 a. m. NT AUTHORITY\SYSTEM KB4532693
+
+
+
+
+Pregunta #12
+
+* El comando utilizado fue Get-HotFix|Select-Object -Property InstalledOn,InstalledBy,HotFixID,Description | Sort-Object -Property Description | ConvertTo-Html| Out-File question12.html*
+
+PS C:\WINDOWS\system32> Get-HotFix|Select-Object -Property InstalledOn,InstalledBy,HotFixID,Description | Sort-Object -Property Description | ConvertTo-Html| Out-File question12.html
+PS C:\WINDOWS\system32> ErrorTerminación(): "Se ha detenido la canalización."
+
+
+* Se ha adjuntado el archivo saliente en el repositorio, este es llamado question12.html *
+
+Pregunta #13
+
+*El comando utilizado fue Get-EventLog -LogName System -Newest 50 | Sort-Object -Property TimeWritten,Index| Select-Object -Property Index,TimeWritten,Source*
+
+*Se asumió que como se estaba realizando el transcript de la operación entonces ya se estaba exportando a un archivo de texto*
+
+
+PS C:\WINDOWS\system32> Get-EventLog -LogName System -Newest 50 | Sort-Object -Property TimeWritten,Index| Select-Object -Property Index,TimeWritten,Source
+
+Index TimeWritten               Source
+----- -----------               ------
+22693 22/02/2020 9:38:54 p. m.  DCOM
+22694 22/02/2020 9:44:20 p. m.  Microsoft-Windows-Kernel-Power
+22695 22/02/2020 10:24:57 p. m. Microsoft-Windows-Kernel-General
+22696 22/02/2020 10:25:57 p. m. avgntflt
+22697 22/02/2020 10:31:09 p. m. Microsoft-Windows-UserModePowerService
+22698 22/02/2020 10:31:09 p. m. Microsoft-Windows-UserModePowerService
+22699 22/02/2020 10:31:13 p. m. BROWSER
+22700 22/02/2020 10:31:13 p. m. Microsoft-Windows-Kernel-Power
+22701 22/02/2020 10:31:16 p. m. Microsoft-Windows-Kernel-Power
+22702 22/02/2020 10:31:47 p. m. Microsoft-Windows-Kernel-General
+22703 22/02/2020 10:31:47 p. m. Microsoft-Windows-Kernel-Power
+22704 22/02/2020 10:31:48 p. m. BROWSER
+22705 22/02/2020 10:31:51 p. m. Microsoft-Windows-Power-Troubleshooter
+22706 22/02/2020 10:31:51 p. m. Microsoft-Windows-UserModePowerService
+22707 22/02/2020 10:31:52 p. m. Microsoft-Windows-UserModePowerService
+22708 22/02/2020 10:32:58 p. m. Microsoft-Windows-Kernel-Processor-Power
+22709 22/02/2020 10:32:58 p. m. Microsoft-Windows-Kernel-Processor-Power
+22710 22/02/2020 10:32:58 p. m. Microsoft-Windows-Kernel-Processor-Power
+22711 22/02/2020 10:32:58 p. m. Microsoft-Windows-Kernel-Processor-Power
+22712 22/02/2020 11:48:33 p. m. User32
+22713 22/02/2020 11:48:38 p. m. Microsoft-Windows-Winlogon
+22714 22/02/2020 11:48:38 p. m. Microsoft-Windows-Kernel-Power
+22715 22/02/2020 11:48:39 p. m. Microsoft-Windows-UserModePowerService
+22716 22/02/2020 11:48:39 p. m. Microsoft-Windows-UserModePowerService
+22717 22/02/2020 11:48:45 p. m. Microsoft-Windows-Kernel-Power
+22718 22/02/2020 11:48:48 p. m. BROWSER
+22720 22/02/2020 11:48:51 p. m. Microsoft-Windows-Kernel-Power
+22719 23/02/2020 7:36:27 a. m.  BROWSER
+22721 23/02/2020 7:36:27 a. m.  Microsoft-Windows-Kernel-General
+22722 23/02/2020 7:36:32 a. m.  Microsoft-Windows-Kernel-Boot
+22723 23/02/2020 7:36:32 a. m.  Microsoft-Windows-Kernel-Boot
+22724 23/02/2020 7:36:32 a. m.  Microsoft-Windows-Kernel-Boot
+22725 23/02/2020 7:36:32 a. m.  Microsoft-Windows-Kernel-Boot
+22726 23/02/2020 7:36:32 a. m.  Microsoft-Windows-Kernel-Boot
+22727 23/02/2020 7:36:35 a. m.  Microsoft-Windows-Winlogon
+22728 23/02/2020 7:36:35 a. m.  Microsoft-Windows-Power-Troubleshooter
+22729 23/02/2020 7:36:37 a. m.  Microsoft-Windows-UserModePowerService
+22730 23/02/2020 7:36:37 a. m.  Microsoft-Windows-UserModePowerService
+22731 23/02/2020 7:38:01 a. m.  DCOM
+22732 23/02/2020 7:44:09 a. m.  Microsoft-Windows-Kernel-Power
+22733 23/02/2020 7:44:45 a. m.  DCOM
+22734 23/02/2020 8:02:46 a. m.  Service Control Manager
+22735 23/02/2020 8:31:23 a. m.  Service Control Manager
+22736 23/02/2020 8:31:42 a. m.  Microsoft-Windows-Kernel-General
+22737 23/02/2020 8:32:37 a. m.  Microsoft-Windows-Time-Service
+22738 23/02/2020 8:32:39 a. m.  Microsoft-Windows-Time-Service
+22739 23/02/2020 8:32:53 a. m.  Microsoft-Windows-Time-Service
+22740 23/02/2020 8:32:53 a. m.  Microsoft-Windows-Kernel-General
+22741 23/02/2020 8:33:32 a. m.  Service Control Manager
+22742 23/02/2020 10:16:18 a. m. Microsoft-Windows-Kernel-Power
+
+
+PS C:\WINDOWS\system32> Stop-Transcript
+**********************
+Fin de la transcripción de Windows PowerShell
+Hora de finalización: 20200223102140
+**********************
